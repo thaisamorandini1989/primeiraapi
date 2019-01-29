@@ -13,7 +13,5 @@ public class AlgamoneyapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AlgamoneyapiApplication.class, args);
 	}
-
-	
 }
 

@@ -23,47 +23,45 @@ import com.example.algamoneyapi.model.Pessoa_;
 import com.example.algamoneyapi.repository.filter.LancamentoFilter;
 import com.example.algamoneyapi.repository.projection.ResumoLancamento;
 
-public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
-	
+public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
+
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
 	public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
-		Root<Lancamento>root = criteria.from(Lancamento.class);
-		
-		//criar as restrições
-		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder , root);
+		Root<Lancamento> root = criteria.from(Lancamento.class);
+
+		// criar as restrições
+		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
-		
+
 		TypedQuery<Lancamento> query = manager.createQuery(criteria);
-		
-		adicionarRestricoesDePaginacao(query,pageable);
-		
-		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter)); 
+
+		adicionarRestricoesDePaginacao(query, pageable);
+
+		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 	}
-	
+
 	@Override
 	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
-		
-		criteria.select(builder.construct(ResumoLancamento.class
-				, root.get(Lancamento_.codigo), root.get(Lancamento_.descricao)
-				, root.get(Lancamento_.dataVencimento), root.get(Lancamento_.dataPagamento)
-				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
-				, root.get(Lancamento_.categoria).get(Categoria_.nome)
-				, root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
-		
+
+		criteria.select(builder.construct(ResumoLancamento.class, root.get(Lancamento_.codigo),
+				root.get(Lancamento_.descricao), root.get(Lancamento_.dataVencimento),
+				root.get(Lancamento_.dataPagamento), root.get(Lancamento_.valor), root.get(Lancamento_.tipo),
+				root.get(Lancamento_.categoria).get(Categoria_.nome), root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
+
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
-		
+
 		TypedQuery<ResumoLancamento> query = manager.createQuery(criteria);
 		adicionarRestricoesDePaginacao(query, pageable);
-		
+
 		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 	}
 
@@ -71,10 +69,10 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
-		
+
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
-		
+
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
 	}
@@ -83,7 +81,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 		int paginaAtual = pageable.getPageNumber();
 		int totalRegistrosPorPagina = pageable.getPageSize();
 		int primeiroRegistroDaPagina = paginaAtual * totalRegistrosPorPagina;
-		
+
 		query.setFirstResult(primeiroRegistroDaPagina);
 		query.setMaxResults(totalRegistrosPorPagina);
 	}
@@ -91,27 +89,23 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 	private Predicate[] criarRestricoes(LancamentoFilter lancamentoFilter, CriteriaBuilder builder,
 			Root<Lancamento> root) {
 		List<Predicate> predicates = new ArrayList<>();
-		
-		if(!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
-			predicates.add(
-					builder.like(
-							builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+
+		if (!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
+			predicates.add(builder.like(builder.lower(root.get(Lancamento_.descricao)),
+					"%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
 		}
-		
-		if(lancamentoFilter.getDataVencimentoDe() != null) {
-			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
+
+		if (lancamentoFilter.getDataVencimentoDe() != null) {
+			predicates.add(builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento),
+					lancamentoFilter.getDataVencimentoDe()));
 		}
-		
-		if(lancamentoFilter.getDataVencimentoAte() != null) {
-			predicates.add(
-					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
+
+		if (lancamentoFilter.getDataVencimentoAte() != null) {
+			predicates.add(builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento),
+					lancamentoFilter.getDataVencimentoAte()));
 		}
-		
+
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-
-	
-	
 
 }

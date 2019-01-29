@@ -17,7 +17,5 @@ public abstract class Pessoa_ {
 	public static final String ATIVO = "ativo";
 	public static final String ENDERECO = "endereco";
 	public static final String NOME = "nome";
-
-	
 }
 

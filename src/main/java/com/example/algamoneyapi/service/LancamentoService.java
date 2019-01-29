@@ -11,21 +11,21 @@ import com.example.algamoneyapi.service.exception.PessoaInexistenteOuInativaExce
 
 @Service
 public class LancamentoService {
-	
+
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
-	
+
 	public Lancamento salvar(Lancamento lancamento) {
 		Pessoa pessoa = pessoaRepository.getOne(lancamento.getPessoa().getCodigo());
-		
-		if(pessoa == null || pessoa.isInativo()) {
+
+		if (pessoa == null || pessoa.isInativo()) {
 			throw new PessoaInexistenteOuInativaException();
 		}
-		
+
 		return lancamentoRepository.save(lancamento);
 	}
-	
+
 }

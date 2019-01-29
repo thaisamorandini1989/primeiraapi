@@ -29,7 +29,5 @@ public abstract class Lancamento_ {
 	public static final String CATEGORIA = "categoria";
 	public static final String VALOR = "valor";
 	public static final String DESCRICAO = "descricao";
-
-	
 }
 

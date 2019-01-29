@@ -119,8 +119,6 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler{
 
 		public void setMensagemDesenvolvedor(String mensagemDesenvolvedor) {
 			this.mensagemDesenvolvedor = mensagemDesenvolvedor;
-		}
-		
-	}
-	
+		}	
+	}	
 }

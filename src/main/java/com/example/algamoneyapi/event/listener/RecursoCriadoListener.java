@@ -28,6 +28,4 @@ public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoE
 		
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
-
 }

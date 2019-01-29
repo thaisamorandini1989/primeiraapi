@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import com.example.algamoneyapi.model.TipoLancamento;
 
 public class ResumoLancamento {
-	
+
 	private Integer codigo;
 	private String descricao;
 	private LocalDate dataVencimento;
@@ -15,7 +15,7 @@ public class ResumoLancamento {
 	private TipoLancamento tipo;
 	private String categoria;
 	private String pessoa;
-	
+
 	public ResumoLancamento(Integer codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
 			BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
 		this.codigo = codigo;
@@ -91,6 +91,5 @@ public class ResumoLancamento {
 	public void setPessoa(String pessoa) {
 		this.pessoa = pessoa;
 	}
-	
-	
+
 }

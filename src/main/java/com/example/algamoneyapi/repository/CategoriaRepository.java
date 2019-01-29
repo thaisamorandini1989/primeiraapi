@@ -6,5 +6,4 @@ import com.example.algamoneyapi.model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
 
-	
 }
