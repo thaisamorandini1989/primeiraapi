@@ -31,4 +31,5 @@ public class TokenResource {
 		resp.setStatus(HttpStatus.NO_CONTENT.value());
 		
 	}
+	
 }

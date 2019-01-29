@@ -9,5 +9,6 @@ import com.example.algamoneyapi.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	
 	public Optional<Usuario> findByEmail(String email);
+
 	
 }

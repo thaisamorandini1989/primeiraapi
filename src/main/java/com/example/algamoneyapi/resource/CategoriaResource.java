@@ -53,4 +53,5 @@ public class CategoriaResource {
 		 Categoria categoria = categoriaRepository.getOne(codigo);
 		 return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
 	}
+	
 }

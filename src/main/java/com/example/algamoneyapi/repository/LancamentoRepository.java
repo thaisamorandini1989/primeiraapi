@@ -6,5 +6,6 @@ import com.example.algamoneyapi.model.Lancamento;
 import com.example.algamoneyapi.repository.lancamento.LancamentoRepositoryQuery;
 
 public interface LancamentoRepository extends JpaRepository<Lancamento, Integer>,LancamentoRepositoryQuery{
+
 	
 }

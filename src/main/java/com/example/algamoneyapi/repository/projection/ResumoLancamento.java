@@ -92,4 +92,5 @@ public class ResumoLancamento {
 		this.pessoa = pessoa;
 	}
 	
+	
 }

@@ -16,3 +16,4 @@ INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, obser
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria, codigo_pessoa) values ('Supermecado Extra', '2019-01-02', '2019-01-02', 1010.32, null, 'DESPESA', 3, 2);
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria, codigo_pessoa) values ('Instrumentos', '2018-12-10', null, 1040.32, null, 'DESPESA', 1, 3);
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria, codigo_pessoa) values ('Droga Farma', '2019-01-15', null, 200.30, null, 'DESPESA', 4, 5);
+

@@ -14,5 +14,6 @@ public class AlgamoneyapiApplication {
 		SpringApplication.run(AlgamoneyapiApplication.class, args);
 	}
 
+	
 }
 

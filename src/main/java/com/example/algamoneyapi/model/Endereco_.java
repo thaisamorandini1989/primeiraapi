@@ -24,5 +24,6 @@ public abstract class Endereco_ {
 	public static final String BAIRRO = "bairro";
 	public static final String CEP = "cep";
 
+	
 }
 

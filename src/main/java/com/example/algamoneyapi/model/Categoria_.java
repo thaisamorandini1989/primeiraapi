@@ -13,6 +13,8 @@ public abstract class Categoria_ {
 
 	public static final String CODIGO = "codigo";
 	public static final String NOME = "nome";
+	
+	
 
 }
 
